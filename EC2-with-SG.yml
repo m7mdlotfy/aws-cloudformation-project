@@ -15,14 +15,14 @@ Resources:
                FromPort: 80
                ToPort: 80
                CidrIp: 0.0.0.0/0
-           VpcId: vpc-060a67bf341828fb5
+           VpcId: vpc-0e300cdb5e33afd9c
 
     myec2:
       Type: AWS::EC2::Instance
       Properties: 
            ImageId: ami-0aa7d40eeae50c9a9
            InstanceType: t2.micro
-           KeyName: ec2keypair
+           KeyName: ansiblekey
            NetworkInterfaces: 
                - AssociatePublicIpAddress: "true"
                  DeviceIndex: "0"

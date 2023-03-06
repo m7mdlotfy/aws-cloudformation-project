@@ -1,0 +1,28 @@
+version: 2.1
+jobs:
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: "Say hello"
+          command: "echo Hello Lotfy"
+
+  create_ec2: 
+      docker:
+        - image: amazon/aws-cli
+      steps:
+        - checkout
+        - run:
+            name: Create Cloudformation Stack
+            command: |
+              aws cloudformation deploy \
+                --template-file EC2-with-SG.yml \
+                --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5} \
+                --region us-east-1        
+workflows:
+  create_ec2-workflow:
+    jobs:
+      - say-hello
+      - create_ec2
